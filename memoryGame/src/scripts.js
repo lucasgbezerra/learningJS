@@ -4,7 +4,7 @@ let hasFlippedCard = false;
 let firstCard, secondCard;
 
 function flipCard() {
-    this.classList.toggle('flip')
+    this.classList.toggle('flip');
 
     if (!hasFlippedCard) {
         firstCard = this;
@@ -18,21 +18,31 @@ function flipCard() {
     }
 }
 
+// Virar a carta para posição original
+function turnCardBack() {
+    setTimeout(
+        () => {
+            firstCard.classList.remove('flip');
+            secondCard.classList.remove('flip')
+        }, 1000
+    );
+}
 
 // Desabilita o listener de click do par de cartas
-function disableCards(){
-    firstCard.removeEventListener('click', flipCard)
-    secondCard.removeEventListener('click', flipCard)
+function disableCards() {
+    firstCard.removeEventListener('click', flipCard);
+    secondCard.removeEventListener('click', flipCard);
 }
 
 
 // Confere se as cartas são iguais
 function checkMatch() {
     if (firstCard.getAttribute('data-name') === secondCard.getAttribute('data-name')) {
-        disableCards()
-        return true
+        disableCards();
+        return true;
     }
-    return false
+    turnCardBack();
+    return false;
 
 }
 
