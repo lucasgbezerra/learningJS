@@ -7,12 +7,13 @@ let disableClick = false;
 let score = 0;
 
 function flipCard() {
-    this.classList.toggle('flip');
 
     if (disableClick)
         return;
+    if (firstCard === this)
+        return;
+    this.classList.toggle('flip');
 
-    console.log(disableClick)
     if (!hasFlippedCard) {
         firstCard = this;
         hasFlippedCard = true;
@@ -49,18 +50,15 @@ function disableCards() {
 function plusOne() {
     score++;
     points.textContent = score;
-
 }
 
 (function reset() {
     [firstCard, secondCard] = [null, null];
     hasFlippedCard = false;
-    disableClick = false;
     score = 0;
     points.textContent = score;
 
     shuffleCards();
-
 })();
 
 // Baralhar as cartas ao iniciar a partida
@@ -76,14 +74,12 @@ function shuffleCards() {
 
 // Confere se as cartas são iguais
 function checkMatch() {
-    console.log(firstCard.getAttribute('data-name'), secondCard.getAttribute('data-name'))
     if (firstCard.getAttribute('data-name') === secondCard.getAttribute('data-name')) {
         disableCards();
         plusOne();
-        return true;
+    } else {
+        turnCardBack();
     }
-    turnCardBack();
-    return false
 }
 
 // Listener para todas as cartas, ativado com o clique e chama a
