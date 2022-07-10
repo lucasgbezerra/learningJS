@@ -1,11 +1,10 @@
 const cards = document.querySelectorAll('.memory-card');
-const points = document.querySelector('.score')
+const points = document.querySelector('span')
 
 let hasFlippedCard = false;
 let firstCard, secondCard;
 let disableClick = false;
 let score = 0;
-points.textContent = score;
 
 function flipCard() {
     this.classList.toggle('flip');
@@ -17,7 +16,7 @@ function flipCard() {
     if (!hasFlippedCard) {
         firstCard = this;
         hasFlippedCard = true;
-    }else{
+    } else {
         secondCard = this;
         hasFlippedCard = false;
         checkMatch();
@@ -47,12 +46,33 @@ function disableCards() {
 }
 
 // Adiciona a pontuação
-function plusOne(){
+function plusOne() {
     score++;
     points.textContent = score;
 
 }
 
+(function reset() {
+    [firstCard, secondCard] = [null, null];
+    hasFlippedCard = false;
+    disableClick = false;
+    score = 0;
+    points.textContent = score;
+
+    shuffleCards();
+
+})();
+
+// Baralhar as cartas ao iniciar a partida
+// uso da IIFE
+function shuffleCards() {
+    cards.forEach(
+        card => {
+            let pos = Math.floor(Math.random() * 12);
+            card.style.order = pos;
+        }
+    );
+}
 
 // Confere se as cartas são iguais
 function checkMatch() {
@@ -62,8 +82,8 @@ function checkMatch() {
         plusOne();
         return true;
     }
-        turnCardBack();
-        return false
+    turnCardBack();
+    return false
 }
 
 // Listener para todas as cartas, ativado com o clique e chama a

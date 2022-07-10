@@ -8,6 +8,7 @@ body {
     height: 100vh;
     display: flex;
     background: rgb(124, 39, 204);
+    flex-direction: column;
 }
 
 .memory-game {
@@ -52,9 +53,9 @@ body {
     transform: rotateY(180deg);
 }
 
-.score{
+.scoreboard{
     color: white;
     font-family: 'Times New Roman', Times, serif;
-    font-size: 50px;
+    font-size: 35px;
     text-align: center;
 }
