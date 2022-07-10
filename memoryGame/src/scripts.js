@@ -1,8 +1,11 @@
 const cards = document.querySelectorAll('.memory-card');
+const points = document.querySelector('.score')
 
 let hasFlippedCard = false;
 let firstCard, secondCard;
-let disableClick = false
+let disableClick = false;
+let score = 0;
+points.textContent = score;
 
 function flipCard() {
     this.classList.toggle('flip');
@@ -43,12 +46,20 @@ function disableCards() {
     secondCard.removeEventListener('click', flipCard);
 }
 
+// Adiciona a pontuação
+function plusOne(){
+    score++;
+    points.textContent = score;
+
+}
+
 
 // Confere se as cartas são iguais
 function checkMatch() {
     console.log(firstCard.getAttribute('data-name'), secondCard.getAttribute('data-name'))
     if (firstCard.getAttribute('data-name') === secondCard.getAttribute('data-name')) {
         disableCards();
+        plusOne();
         return true;
     }
         turnCardBack();
