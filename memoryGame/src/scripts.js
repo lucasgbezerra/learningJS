@@ -5,6 +5,7 @@ let hasFlippedCard = false;
 let firstCard, secondCard;
 let disableClick = false;
 let score = 0;
+points.textContent = score;
 
 function flipCard() {
 
@@ -12,6 +13,7 @@ function flipCard() {
         return;
     if (firstCard === this)
         return;
+        
     this.classList.toggle('flip');
 
     if (!hasFlippedCard) {
@@ -35,9 +37,10 @@ function turnCardBack() {
             firstCard.classList.remove('flip');
             secondCard.classList.remove('flip');
 
-            disableClick = false;
+            reset()
         }, 1000
     );
+
 }
 
 // Desabilita o listener de click do par de cartas
@@ -52,25 +55,22 @@ function plusOne() {
     points.textContent = score;
 }
 
-(function reset() {
+function reset() {
     [firstCard, secondCard] = [null, null];
     hasFlippedCard = false;
-    score = 0;
-    points.textContent = score;
-
-    shuffleCards();
-})();
+    disableClick = false;
+}
 
 // Baralhar as cartas ao iniciar a partida
 // uso da IIFE
-function shuffleCards() {
+(function shuffleCards() {
     cards.forEach(
         card => {
             let pos = Math.floor(Math.random() * 12);
             card.style.order = pos;
         }
     );
-}
+})();
 
 // Confere se as cartas são iguais
 function checkMatch() {
