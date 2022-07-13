@@ -1,0 +1,58 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.title {
+    font-size: 50px;
+}
+
+
+.background {
+    padding: 40px;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: aqua;
+}
+
+.gameboard {
+    width: 450px;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 40;
+}
+
+.tile {
+    height: 150px;
+    width: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 120px;
+    border-right: 2px solid white;
+    border-bottom: 2px solid white;
+}
+
+.tile:nth-child(3n) {
+    border-right: none;
+}
+
+.tile:nth-child(6)~.tile {
+    border-bottom: none;
+}
+
+.reset-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border-color: white;
+    font-size: 20px;
+    transition: 200ms transform;
+    font-weight: 400;
+}
